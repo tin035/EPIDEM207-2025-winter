@@ -1,6 +1,6 @@
 /************************************************************************
 Program Title: EPIDEM 207 Assignment 3 Code
-Name: Timothy Nguyen
+Name:
 Date: 2/26/2025
 Purpose: Attempt to replicate Assignment 2 from another student
 *************************************************************************/
