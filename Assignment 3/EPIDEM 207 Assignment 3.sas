@@ -10,54 +10,54 @@ libname loc "C:\Users\u6045324\Desktop\EPIDEM 207 Files\CHIS Adult 2023";
 *Formats;
 proc format;
 	VALUE  YESNOF
-	        1                   = "Yes"
-	        2                   = "No"
+	        1              = "Yes"
+	        2              = "No"
 	;
 	VALUE  SRSEXF
-	        1                   = "Male"
-	        2                   = "Female"
+	        1              = "Male"
+	        2              = "Female"
 	;
 	VALUE AGECATF
-		    1					= "18-25"
-		    2					= "26-34"
-		    3					= "35-44"
-		    4					= "45-54"
-		    5					= "55-64"
-		    6					= "65+"
+		1		= "18-25"
+		2		= "26-34"
+		3		= "35-44"
+		4		= "45-54"
+		5		= "55-64"
+		6		= "65+"
 	;
 	VALUE  RACECATF
-	        1                   = "Hispanic"
-	        2                   = "White, Non-Hispanic"
-		    3					= "African American, Non-Hispanic"
-	        4                   = "American Indian/Alaskan Native, NH"
-	        5                   = "Asian, Non-Hispanic"
-	        6                   = "Other/Two or more races";
+	        1               = "Hispanic"
+	        2               = "White, Non-Hispanic"
+		3		= "African American, Non-Hispanic"
+	        4               = "American Indian/Alaskan Native, NH"
+	        5               = "Asian, Non-Hispanic"
+	        6               = "Other/Two or more races";
 	;
 	VALUE SPDLVLF
-		    1					= "Acute SPD"
-		    2					= "Recent SPD"
-		    3					= "No SPD"
+		1		= "Acute SPD"
+		2		= "Recent SPD"
+		3		= "No SPD"
 	; 
 	VALUE EDULVLF
-			1					= "Less than high school degree"
-			2					= "High school graduate"
-			3					= "Some college"
-			4					= "College or more"
+		1		= "Less than high school degree"
+		2		= "High school graduate"
+		3		= "Some college"
+		4		= "College or more"
 	;
 	VALUE POVLVLF
-			1					= "<100% FPL"
-			2					= "100%-199% FPL"
-			3					= "200%-399% FPL"
-			4					= "=400% FPL"
+		1		= "<100% FPL"
+		2		= "100%-199% FPL"
+		3		= "200%-399% FPL"
+		4		= "=400% FPL"
 	;
 	VALUE MAR2F
-			1					= "Married"
-			2					= "Not married"
+		1		= "Married"
+		2		= "Not married"
 	;
 	VALUE MAR3F
-			1					= "Married"
-			2					= "Other"
-			3					= "Never married"
+		1		= "Married"
+		2		= "Other"
+		3		= "Never married"
 	;
 run;
 
@@ -70,55 +70,55 @@ data loc.chis2023clean;
 		*Recode age;
 		age_cat=.;
 		if SRAGE_P1 = 18 then age_cat=1; 			*18-25;
-		else if SRAGE_P1 in (26:30) then age_cat=2;	*26-34;
-		else if SRAGE_P1 in (35:40) then age_cat=3;	*35-44;
-		else if SRAGE_P1 in (45:50) then age_cat=4;	*45-54;
-		else if SRAGE_P1 in (55:60) then age_cat=5;	*55-64;
-		else if SRAGE_P1 in (65:85) then age_cat=6;	*65+;
+		else if SRAGE_P1 in (26:30) then age_cat=2;		*26-34;
+		else if SRAGE_P1 in (35:40) then age_cat=3;		*35-44;
+		else if SRAGE_P1 in (45:50) then age_cat=4;		*45-54;
+		else if SRAGE_P1 in (55:60) then age_cat=5;		*55-64;
+		else if SRAGE_P1 in (65:85) then age_cat=6;		*65+;
 		
 		*Recode education level;
 		edu_lvl=.;
-		if AHEDC_P1 in (1:2) then edu_lvl=1;		*less than high school;
+		if AHEDC_P1 in (1:2) then edu_lvl=1;			*less than high school;
 		else if AHEDC_P1=3 then edu_lvl=2;			*high school graduate (Ref);
 		else if AHEDC_P1=4 then edu_lvl=3;			*some college;
-		else if AHEDC_P1 in (5:9) then edu_lvl=4;	*college or more;	
+		else if AHEDC_P1 in (5:9) then edu_lvl=4;		*college or more;	
 
 		*Recode poverty level;
 		poverty_lvl=.;
-		if POVLL2_P1V2 < 1 then poverty_lvl=1;				*<100% FPL (Ref);
+		if POVLL2_P1V2 < 1 then poverty_lvl=1;			*<100% FPL (Ref);
 		else if 1<=POVLL2_P1V2<2 then poverty_lvl=2;		*100%-199% FPL;
 		else if 2<=POVLL2_P1V2<4 then poverty_lvl=3;		*200%-399% FPL;
-		else if 4<=POVLL2_P1V2 then poverty_lvl=4;			*= 400% FPL;
+		else if 4<=POVLL2_P1V2 then poverty_lvl=4;		*= 400% FPL;
 
 
 		*Recode has kids;
 		kids=.;
-		if FAMT4 in (3:4) then kids=1;							*has kids;
-		else if FAMT4 in (1:2) then kids=2;						*no kids;
+		if FAMT4 in (3:4) then kids=1;				*has kids;
+		else if FAMT4 in (1:2) then kids=2;			*no kids;
 
 		*Recode martial status 2 categories;
 		marital_2cat=.;
-		if marital_3cat=1 then marital_2cat=1;						*Married;
-		else if marital_3cat in (2:3) then marital_2cat=2;			*Not Married;
+		if marital_3cat=1 then marital_2cat=1;			*Married;
+		else if marital_3cat in (2:3) then marital_2cat=2;	*Not Married;
 
 		*Code distress level;
 		spd_lvl = .;
-		if spd_month=1 then spd_lvl=1;						*acute spd;
+		if spd_month=1 then spd_lvl=1;				*acute spd;
  		else if spd_month=2 and spd_year=1 then spd_lvl=2;	*recent spd;
-		else if spd_month=2 then spd_lvl=3;					*no spd;
+		else if spd_month=2 then spd_lvl=3;			*no spd;
 
 		label 
 		age_cat = "Age (5 cat)"
 		gender = "Gender"
-	    race = "Race/Ethnicity (6 cat)"
-	    spd_lvl = "Serious Psychological Distress (3 cat)"
+	  	race = "Race/Ethnicity (6 cat)"
+	    	spd_lvl = "Serious Psychological Distress (3 cat)"
 		spd_month = "SPD in the past month"
 		spd_year = "SPD in the past year"
-	    edu_lvl = "Educational Attainment (3 cat)"
+	   	edu_lvl = "Educational Attainment (3 cat)"
 		poverty_lvl = "Poverty level (4 cat)"
 		marital_3cat = "Marital Status (3 cat)"
 		marital_2cat = "Marital Status (2 cat)"
-	    subuse_mental = "Needed Help for Substance/Mental Problem"
+	    	subuse_mental = "Needed Help for Substance/Mental Problem"
 		kids = "Has kids"
 		binge = "Binge drinking in the past 30 days"
 		weight = "CHIS 2023 FINAL RAKED WEIGHT"
@@ -147,15 +147,15 @@ modify chis2023clean;
 	xattr set var
 		age_cat (Values = "1 = 18-25; 2 = 26-34; 3 = 35-44; 4 = 45-54; 5 = 55-64; 6 = 65+")
 		gender (Values = "1 = Male; 2 = Female")
-	    race (Values = "1 = Hispanic; 2 = White, Non-Hispanic; 3 = African American, Non-Hispanic; 4 = American Indian/Alaskan Native, NH; 5 = Asian, Non-Hispanic; 6 = Other/Two ore more races")
-	    spd_lvl (Values = "1 = Acute SPD; 2 = Recent SPD; 3 = No SPD")
+	    	race (Values = "1 = Hispanic; 2 = White, Non-Hispanic; 3 = African American, Non-Hispanic; 4 = American Indian/Alaskan Native, NH; 5 = Asian, Non-Hispanic; 6 = Other/Two ore more races")
+	   	spd_lvl (Values = "1 = Acute SPD; 2 = Recent SPD; 3 = No SPD")
 		spd_month (Values = "1 = Yes; 2= No")
 		spd_year (Values = "1 = Yes; 2= No")
-	    edu_lvl (Values = "1 = Less than high school degree; 2 = High school graduate; 3 = Some college; 4 = College or more")
+	    	edu_lvl (Values = "1 = Less than high school degree; 2 = High school graduate; 3 = Some college; 4 = College or more")
 		poverty_lvl (Values = "1 = <100% FPL; 2 = 100%-199% FPL; 3 = 200-399% FPL; 4 = = 400% FPL")
 		marital_3cat (Values = "1 = Married; 2 = Other; 3 = Never married")
 		marital_2cat (Values = "1 = Married; 2 = Not married")
-	    subuse_mental (Values = "1 = Yes; 2= No")
+	    	subuse_mental (Values = "1 = Yes; 2= No")
 		kids (Values = "1 = Yes; 2= No")
 		binge (Values = "1 = Yes; 2= No")
 	;
