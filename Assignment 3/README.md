@@ -1,6 +1,6 @@
-#README
+# README
 
-##Assignment 3
+## Assignment 3
 
 Description: This folder contains the code for Assignment 3. In this assignment, I attempt to replicate the tables and figures for another group's Assignment 2.
 The title of their Assignment 2 was "The association between marital status and serious psychological distress." Using the California Health Interview Survey (CHIS)
