@@ -14,6 +14,8 @@ Dataset: California Health Interview Survey (CHIS) 2020
 Objective: To examine whether experiencing restlessness in the last 30 days increased odds of marijuana use in the last 30 days among California adults who have ever tried marijuana
 
 Exposure: Experiencing Restlessness in the past 30 days
+
 Outcome: Marijuana use in the past 30 days
+
 Covariates: age, race/ethncitiy, educational attainment, annual household income, employment status, marital status, urban residency, current smoking habits, and illicit drug use
 
