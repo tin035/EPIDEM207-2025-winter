@@ -69,8 +69,7 @@ proc format;
 		   3					  = "No restlessness"
 	;
 	VALUE AC117V2F
-		  -1					  = "Never used marijuana"
-           1                      = "Did not use in last 30 days"
+           -1,1                   = "0 days"
            2                      = "1-2 days"
            3                      = "3-5 days"
            4                      = "6-9 days"

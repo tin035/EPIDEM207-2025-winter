@@ -70,8 +70,7 @@ proc format;
 		   3					  = "No restlessness"
 	;
 	VALUE AC117V2F
-		  -1					  = "Never used marijuana"
-           1                      = "Did not use in last 30 days"
+           -1,1                   = "0 days"
            2                      = "1-2 days"
            3                      = "3-5 days"
            4                      = "6-9 days"
@@ -110,7 +109,7 @@ modify chis2020cleana2;
 			RESTLESSHL		(Values = "1 = High, 2 = Low, 3 = No restlessness")
 			AC115			(Values = "1 = Yes, 2 = No")
 			MJ_MONTH		(Values = "1 = Yes, 2 = No")
-			AC117V2			(Values = "-1 = Never used marijuana, 1 = Did not use in last 30 days, 2 = 1-2 days, 3 = 3-5 days, 4 = 6-9 days, 5 = 10-19 days, 6 = 20-29 days, 7 = 30 days or more")
+			AC117V2			(Values = "-1, 1 = 0 days, 2 = 1-2 days, 3 = 3-5 days, 4 = 6-9 days, 5 = 10-19 days, 6 = 20-29 days, 7 = 30 days or more")
 	;
 quit;
 
